@@ -1,0 +1,98 @@
+p {
+    color: red;
+    font-size: 8px;
+}
+img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.h2aicon{
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: auto;
+    margin-top: 100px;
+}
+.title1{
+    font-size: 70px;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 0.5em;
+}
+.title2{
+    font-size: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;    
+}
+.title3{
+  font-size: 15px;
+  margin: 60px auto;     /* ← 左右autoで中央に */
+  text-align: center;    /* ← テキスト中央寄せ */
+}
+
+.narabe3{
+    display: flex;
+    justify-content: center;    
+}
+/* 白帯は疑似要素で作る */
+.main-visual{
+  --head-gap: 180px;
+  position: relative;
+  display: block;
+  width: 100%;
+  background:#fff;
+}
+.main-visual::before{
+  content:"";
+  display:block;
+  height: var(--head-gap);
+  background:#fff;
+}
+.main-visual > img:first-child{
+  display:block; width:100%; height:auto;
+}
+
+/* ▼ overlay を強制的に上書き（古い bottom を無効化） */
+.main-visual .overlay{
+  position:absolute !important;
+  top: var(--head-gap) !important;    /* 白帯の下端 */
+  bottom: auto !important;            /* ← これで旧指定を殺す */
+  left:50%;
+  transform: translate(-50%, -50%) !important; /* 半分だけまたがる */
+  z-index:10;
+  width:auto;                          /* 全幅指定の無効化 */
+  max-width: clamp(280px, 60vw, 900px);
+  pointer-events:none;
+}
+@media (max-width:640px){
+  .main-visual{ --head-gap: 120px; }
+}
+
+/* セクション全体を中央寄せ＋左右余白 */
+.section-wrap {
+  max-width: 72rem;          /* = 1152px 相当（お好みで） */
+  margin: 0 auto;            /* 中央寄せ */
+  padding-left: 1.5rem;      /* 24px の左右余白 */
+  padding-right: 1.5rem;
+}
+
+/* 行の左右に効いているネガティブマージンを無効化して中央に寄せる */
+.features-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  justify-content: center;   /* 子要素を中央寄せ */
+  gap: 2.5rem;               /* カード間の余白（= 40px） */
+}
+
+/* カード幅を整える（必要なら） */
+.features-row > div {
+  max-width: 28rem;          /* 448px くらい */
+}
+
+/* モバイルでは1列＆少し内側に */
+@media (max-width: 768px) {
+  .section-wrap { padding-left: 1rem; padding-right: 1rem; }
+  .features-row { gap: 1.75rem; }    /* 28px */
+}
